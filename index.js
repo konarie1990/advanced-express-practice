@@ -1,6 +1,6 @@
 const express = require("express");
-let comments = require("./comments");
-let products = require("./products");
+let commentsRoute = require("./commentsRoute");
+let productsRoute = require("./productsRoute");
 let vehiclesRoute = require("./vehiclesRoute");
 let contactsRoute = require("./contactsRoute");
 
@@ -10,8 +10,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-app.use("/", contactsRoute);
+app.use("/", commentsRoute);
+app.use("/", productsRoute);
 app.use("/", vehiclesRoute);
+app.use("/", contactsRoute);
 
 const port = process.env.PORT || 4001;
 
@@ -19,28 +21,28 @@ app.listen(port, () => {
   console.log("Web server is now listening for messages on port", port);
 });
 
-app.get("/comments", (req, res) => res.json(comments));
+// app.get("/comments", (req, res) => res.json(comments));
 
-app.get("/products", (req, res) => res.json(products));
+// app.get("/products", (req, res) => res.json(products));
 
 // app.get("/vehicles", (req, res) => res.json(vehicles));
 
 // app.get("/contacts", (req, res) => res.json(contacts));
 
 // Create routes to one record
-app.get("/comments/:id", (req, res) => {
-  let userId = comments.findIndex(comments => {
-    return comments._id == req.params.id;
-  });
-  res.json(comments[userId]);
-});
+// app.get("/comments/:id", (req, res) => {
+//   let userId = comments.findIndex(comments => {
+//     return comments._id == req.params.id;
+//   });
+//   res.json(comments[userId]);
+// });
 
-app.get("/products/:id", (req, res) => {
-  let userId = products.findIndex(products => {
-    return products._id == req.params.id;
-  });
-  res.json(products[userId]);
-});
+// app.get("/products/:id", (req, res) => {
+//   let userId = products.findIndex(products => {
+//     return products._id == req.params.id;
+//   });
+//   res.json(products[userId]);
+// });
 
 // app.get("/vehicles/:id", (req, res) => {
 //   let userId = vehicles.findIndex(vehicles => {
@@ -58,15 +60,15 @@ app.get("/products/:id", (req, res) => {
 
 // Create routes to create a new record
 
-app.post("/comments", (req, res) => {
-  comments.push(req.body);
-  res.send(comments);
-});
+// app.post("/comments", (req, res) => {
+//   comments.push(req.body);
+//   res.send(comments);
+// });
 
-app.post("/products", (req, res) => {
-  products.push(req.body);
-  res.send(products);
-});
+// app.post("/products", (req, res) => {
+//   products.push(req.body);
+//   res.send(products);
+// });
 
 // app.post("/vehicles", (req, res) => {
 //   vehicles.push(req.body);
